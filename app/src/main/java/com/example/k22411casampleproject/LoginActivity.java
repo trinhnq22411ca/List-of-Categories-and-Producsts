@@ -25,6 +25,10 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtPassword;
     CheckBox chkSaveLogin;
 
+    private int backPressCount = 0;
+    private static final long BACK_PRESS_INTERVAL = 2000; // 2 giây
+    private long lastBackPressTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,4 +94,22 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    @Override
+    public void onBackPressed() {
+        long currentTime = System.currentTimeMillis();
+
+        if (currentTime - lastBackPressTime > BACK_PRESS_INTERVAL) {
+            backPressCount = 0; // Nếu cách quá lâu thì reset đếm
+        }
+
+        backPressCount++;
+        lastBackPressTime = currentTime;
+
+        if (backPressCount == 3) {
+            do_exit(null); // Gọi hàm hiện dialog
+            backPressCount = 0;
+        } else {
+            Toast.makeText(this, "Nhấn back " + (3 - backPressCount) + " lần nữa để thoát", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

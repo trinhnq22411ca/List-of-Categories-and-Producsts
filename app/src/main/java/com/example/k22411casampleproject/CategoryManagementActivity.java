@@ -1,8 +1,8 @@
 package com.example.k22411casampleproject;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,24 +10,37 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class EmployeeManagementActivity extends AppCompatActivity {
+import com.example.models.Category;
+import com.example.models.ListCategory;
+
+public class CategoryManagementActivity extends AppCompatActivity {
+
+    ListView lvCategory;
+    ArrayAdapter<Category> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_employee_management);
+        setContentView(R.layout.activity_category_management);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        addView();
     }
 
-    public void do_open_employee_healthcare(View view) {
-        Intent intent=new Intent(EmployeeManagementActivity.this,
-                EmployeeHealthcareActivity.class
-                );
-        startActivity(intent);
+    private void addView() {
+        lvCategory=findViewById(R.id.lvCategory);
+        adapter=new ArrayAdapter<>(
+                CategoryManagementActivity.this,
+                android.R.layout.simple_list_item_1);
+        ListCategory lc=new ListCategory();
+        lc.generate_sample_dataset();
+        adapter.addAll(lc.getCategories());
+
+        lvCategory.setAdapter(adapter);
+
     }
 }

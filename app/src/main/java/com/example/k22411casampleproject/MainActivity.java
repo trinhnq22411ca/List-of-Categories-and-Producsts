@@ -99,10 +99,10 @@ public class MainActivity extends AppCompatActivity {
         txtEmployee=findViewById(R.id.txtEmployee);
         imgCustomer=findViewById(R.id.imgCustomer);
         txtCustomer=findViewById(R.id.txtCustomer);
-        imgCustomer=findViewById(R.id.imgCategory);
-        txtCustomer=findViewById(R.id.txtCategory);
-        imgCustomer=findViewById(R.id.imgProduct);
-        txtCustomer=findViewById(R.id.txtProduct);
+        imgCategory=findViewById(R.id.imgCategory);
+        txtCategory=findViewById(R.id.txtCategory);
+        imgProduct=findViewById(R.id.imgProduct);
+        txtProduct=findViewById(R.id.txtProduct);
     }
     private void openEmployeeManagementActivity()
     {
